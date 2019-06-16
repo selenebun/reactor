@@ -5,15 +5,19 @@ const COL_MARGIN = 5;
 const ROW_MARGIN = 5;
 const TILE_SIZE = 20;
 
+// Heat-related constants.
+const MAX_HEAT = 1000;
+
 // Dimensions.
 let gridWidth, gridHeight;
 let offsetX, offsetY;
 
 // Simulation state.
-let tiles;
+let tiles, heat;
+let thermal = false;
 
 // Graphics buffers.
-let tileLayer;
+let tileLayer, thermalLayer;
 
 function setup() {
   // Position canvas.
@@ -32,15 +36,31 @@ function setup() {
 
   // Set up tiles.
   tiles = new Grid(cols, rows);
+  heat = new Grid(cols, rows);
 
   // Initialize graphics buffers.
   tileLayer = new TileLayer(gridWidth, gridHeight);
   tileLayer.redraw(tiles);
+  thermalLayer = new ThermalLayer(gridWidth, gridHeight);
 }
 
 function draw() {
   background(34);
 
   // Draw graphics buffers.
-  tileLayer.image(offsetX, offsetY);
+  if (thermal) {
+    thermalLayer.redraw(heat);
+    thermalLayer.image(offsetX, offsetY);
+  } else {
+    tileLayer.image(offsetX, offsetY);
+  }
+}
+
+function keyPressed() {
+  switch (key) {
+    case 't':
+      // Toggle thermal view.
+      thermal = !thermal;
+      break;
+  }
 }
