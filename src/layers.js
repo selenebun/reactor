@@ -1,3 +1,5 @@
+'use strict';
+
 // Graphics buffer for the tile grid.
 class TileLayer {
   constructor(width, height) {

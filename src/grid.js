@@ -1,3 +1,5 @@
+'use strict';
+
 // A 2D grid of tiles.
 class Grid {
   constructor(cols, rows) {
