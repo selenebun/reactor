@@ -84,6 +84,10 @@ function draw() {
   });
 
   if (!paused) {
+    // Spontaneously generate neutrons.
+    spontaneousNeutrons();
+
+    // Update history.
     historyLayer.add(neutrons.length);
   }
 
@@ -155,6 +159,23 @@ function mouseDraw() {
     const { col, row } = nearestTile(x, y);
     tiles.set(col, row, selected);
     tileLayer.redraw(tiles);
+  }
+}
+
+// Randomly generate neutrons from fuel cells.
+function spontaneousNeutrons() {
+  for (let row = 0; row < tiles.rows; row++) {
+    for (let col = 0; col < tiles.cols; col++) {
+      const tileType = tiles.get(col, row);
+      if (tileType === 2 && Math.random() < SPONT_RATE) {
+        // Generate neutron at random coordinate inside the tile.
+        const { x, y } = randomInsideTile(col, row);
+        neutrons.push(new Neutron(x, y));
+
+        // Increase heat at tile.
+        heat.increase(col, row, SPONT_HEAT);
+      }
+    }
   }
 }
 

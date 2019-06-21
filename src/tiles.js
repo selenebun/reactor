@@ -1,3 +1,7 @@
+// Spontaneous neutron generation.
+const SPONT_RATE = 0.002;
+const SPONT_HEAT = 4;
+
 // Data for tiles.
 const TILES = [
   {
