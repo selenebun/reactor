@@ -18,6 +18,7 @@ let offsetX, offsetY;
 // Simulation state.
 let tiles, heat, neutrons;
 let selected = 2;
+let controlRods = false;
 let history = true;
 let paused = false;
 let thermal = false;
@@ -111,6 +112,11 @@ function keyPressed() {
       case 'h':
         // Toggle neutron history visualization.
         history = !history;
+        break;
+      case 'q':
+        // Toggle control rods.
+        controlRods = !controlRods;
+        tileLayer.redraw(tiles);
         break;
       case 't':
         // Toggle thermal view.

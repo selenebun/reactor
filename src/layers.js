@@ -16,13 +16,17 @@ class TileLayer {
   }
 
   // Render tiles to graphics buffer.
-  redraw(tiles) {
+  redraw(tiles, controlRods) {
     for (let row = 0; row < tiles.rows; row++) {
       for (let col = 0; col < tiles.cols; col++) {
         // Fill color based on tile type.
         const value = tiles.get(col, row);
         const tileType = TILES[value];
-        this.graphics.fill(tileType.color);
+        if (typeof tileType.color === 'function') {
+          this.graphics.fill(tileType.color(controlRods));
+        } else {
+          this.graphics.fill(tileType.color);
+        }
 
         // Draw tile at the correct location.
         const x = col * TILE_SIZE;

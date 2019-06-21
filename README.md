@@ -12,6 +12,7 @@ You can run the simulation [here](https://rsaihe.github.io/reactor).
 | Mouse       | Draw on the screen.                                                            |
 | Number keys | Select what to draw. See [below](#item-types) for a more detailed description. |
 | H           | Toggle neutron history visualization.                                          |
+| Q           | Toggle control rods.                                                           |
 | T           | Toggle thermal view.                                                           |
 
 ### Item Types
@@ -24,5 +25,5 @@ You can run the simulation [here](https://rsaihe.github.io/reactor).
 | 3       | **Fuel cells** react with neutrons and produce large amounts of heat.                |
 | 4       | **Coolant** helps to absorb excess heat.                                             |
 | 5 and 6 | **Horizontal and vertical reflectors** reflect neutrons in the respective direction. |
-| 7       | **Control rods** absorb neutrons only when activated.                                |
+| 7       | **Control rods** absorb neutrons only when activated. They can be toggled with `Q`.  |
 | 8       | **Neutron absorbers** absorb neutrons.                                               |

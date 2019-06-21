@@ -33,7 +33,14 @@ const TILES = [
   {
     name: 'Control Rod',
     desc: 'Absorbs neutrons only when activated.',
-    color: [179, 102, 225],
+    color() {
+      // Change color based on whether control rods are activated.
+      if (controlRods) {
+        return [102, 128, 255];
+      } else {
+        return [179, 102, 225];
+      }
+    },
   },
   {
     name: 'Absorber',
