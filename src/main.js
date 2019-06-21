@@ -17,12 +17,16 @@ let offsetX, offsetY;
 
 // Simulation state.
 let tiles, heat, neutrons;
+let selected = 2;
 let history = true;
 let paused = false;
 let thermal = false;
 
 // Graphics buffers.
 let tileLayer, thermalLayer, neutronLayer, historyLayer;
+
+// DOM elements.
+let itemName, itemDesc;
 
 function setup() {
   // Position canvas.
@@ -50,6 +54,13 @@ function setup() {
   thermalLayer = new ThermalLayer(gridWidth, gridHeight);
   neutronLayer = new NeutronLayer(gridWidth, gridHeight);
   historyLayer = new HistoryLayer(MAX_HISTORY_ENTRIES, 180);
+
+  // Cache DOM elements.
+  itemName = document.getElementById('item-name');
+  itemDesc = document.getElementById('item-desc');
+
+  // Update selected item indicator on the sidebar.
+  updateItemInfo();
 }
 
 function draw() {
@@ -86,19 +97,26 @@ function draw() {
 }
 
 function keyPressed() {
-  switch (key) {
-    case ' ':
-      // Toggle pause state.
-      paused = !paused;
-      break;
-    case 'h':
-      // Toggle neutron history visualization.
-      history = !history;
-      break;
-    case 't':
-      // Toggle thermal view.
-      thermal = !thermal;
-      break;
+  // Select neutron or tile type to draw.
+  const num = parseInt(key) - 1;
+  if (!isNaN(num) && num < TILES.length) {
+    selected = num;
+    updateItemInfo();
+  } else {
+    switch (key) {
+      case ' ':
+        // Toggle pause state.
+        paused = !paused;
+        break;
+      case 'h':
+        // Toggle neutron history visualization.
+        history = !history;
+        break;
+      case 't':
+        // Toggle thermal view.
+        thermal = !thermal;
+        break;
+    }
   }
 }
 
@@ -113,6 +131,31 @@ function mouseDraw() {
     return;
   }
 
-  // Spawn a neutron at the mouse position.
-  neutrons.push(new Neutron(x, y));
+  // Check if drawing a neutron or tile.
+  if (selected < 0) {
+    // Spawn a neutron at the mouse position.
+    neutrons.push(new Neutron(x, y));
+  } else {
+    // Update tile grid.
+    const { col, row } = nearestTile(x, y);
+    tiles.set(col, row, selected);
+    tileLayer.redraw(tiles);
+  }
+}
+
+// Update the selected item indicator on the sidebar.
+function updateItemInfo() {
+  let name, desc;
+  if (selected < 0) {
+    name = 'Neutron';
+    desc = 'Reacts with fuel cells.';
+  } else {
+    const tileType = TILES[selected];
+    name = tileType.name;
+    desc = tileType.desc;
+  }
+
+  // Update DOM elements.
+  itemName.innerHTML = name;
+  itemDesc.innerHTML = desc;
 }

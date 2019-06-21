@@ -7,7 +7,6 @@ class TileLayer {
     this.graphics = createGraphics(width, height);
 
     // Misc. draw settings.
-    this.graphics.fill(204);
     this.graphics.stroke(34);
   }
 
@@ -20,6 +19,11 @@ class TileLayer {
   redraw(tiles) {
     for (let row = 0; row < tiles.rows; row++) {
       for (let col = 0; col < tiles.cols; col++) {
+        // Fill color based on tile type.
+        const value = tiles.get(col, row);
+        const tileType = TILES[value];
+        this.graphics.fill(tileType.color);
+
         // Draw tile at the correct location.
         const x = col * TILE_SIZE;
         const y = row * TILE_SIZE;
@@ -135,7 +139,7 @@ class HistoryLayer {
     this.average.push(this.total.reduce((a, b) => a + b) / this.total.length);
 
     // Update maximum value if the new value is greater.
-    this.maximum = max(population, this.maximum);
+    this.maximum = Math.max(population, this.maximum);
   }
 
   // Clear all history entries.
