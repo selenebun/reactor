@@ -13,11 +13,11 @@ let gridWidth, gridHeight;
 let offsetX, offsetY;
 
 // Simulation state.
-let tiles, heat;
+let tiles, heat, neutrons;
 let thermal = false;
 
 // Graphics buffers.
-let tileLayer, thermalLayer;
+let tileLayer, thermalLayer, neutronLayer;
 
 function setup() {
   // Position canvas.
@@ -34,14 +34,16 @@ function setup() {
   offsetX = (width - gridWidth) / 2;
   offsetY = (height - gridHeight) / 2;
 
-  // Set up tiles.
+  // Set up tiles and neutrons.
   tiles = new Grid(cols, rows);
   heat = new Grid(cols, rows);
+  neutrons = [];
 
   // Initialize graphics buffers.
   tileLayer = new TileLayer(gridWidth, gridHeight);
   tileLayer.redraw(tiles);
   thermalLayer = new ThermalLayer(gridWidth, gridHeight);
+  neutronLayer = new NeutronLayer(gridWidth, gridHeight);
 }
 
 function draw() {
@@ -54,6 +56,17 @@ function draw() {
   } else {
     tileLayer.image(offsetX, offsetY);
   }
+
+  // Update and draw neutrons.
+  neutronLayer.redraw(neutrons, n => {
+    n.update();
+  });
+  neutronLayer.image(offsetX, offsetY);
+
+  // Draw when mouse is pressed.
+  if (mouseIsPressed) {
+    mouseDraw();
+  }
 }
 
 function keyPressed() {
@@ -63,4 +76,19 @@ function keyPressed() {
       thermal = !thermal;
       break;
   }
+}
+
+// Draw at the current mouse position.
+function mouseDraw() {
+  // Adjust for the reactor offset.
+  const x = mouseX - offsetX;
+  const y = mouseY - offsetY;
+
+  // Don't draw if outside the grid.
+  if (x < 0 || y < 0 || x > gridWidth || y > gridHeight) {
+    return;
+  }
+
+  // Spawn a neutron at the mouse position.
+  neutrons.push(new Neutron(x, y));
 }

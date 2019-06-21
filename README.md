@@ -6,6 +6,7 @@ You can run the simulation [here](https://rsaihe.github.io/reactor).
 
 ## Controls
 
-| Key | Action               |
-| :-- | :------------------- |
-| T   | Toggle thermal view. |
+| Key   | Action               |
+| :---- | :------------------- |
+| Mouse | Draw on the screen.  |
+| T     | Toggle thermal view. |
