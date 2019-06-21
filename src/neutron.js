@@ -29,6 +29,16 @@ class Neutron {
     this.inUse = false;
   }
 
+  // Find the nearest tile to the neutron's current position.
+  nearestTile() {
+    return nearestTile(this.pos.x, this.pos.y);
+  }
+
+  // Limit neutron velocity.
+  slowDown() {
+    this.vel.limit(2);
+  }
+
   // Update current position.
   update() {
     this.pos.add(this.vel);

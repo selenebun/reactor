@@ -70,7 +70,16 @@ function draw() {
   // Update neutrons.
   neutronLayer.redraw(neutrons, n => {
     if (!paused) {
+      // Update position.
       n.update();
+
+      // Interact with nearest tile.
+      const { col, row } = n.nearestTile();
+      const value = tiles.get(col, row);
+      const tileType = TILES[value];
+      if (tileType && typeof tileType.interact === 'function') {
+        tileType.interact(n, col, row, heat, neutrons);
+      }
     }
   });
 

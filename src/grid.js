@@ -18,6 +18,11 @@ class Grid {
     return this.arr[this.cols * row + col];
   }
 
+  // Increase the value at a particular row and column.
+  increase(col, row, amount) {
+    this.arr[this.cols * row + col] += amount;
+  }
+
   // Set the value at a particular row and column.
   set(col, row, value) {
     this.arr[this.cols * row + col] = value;
