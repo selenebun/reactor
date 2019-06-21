@@ -105,3 +105,76 @@ class NeutronLayer {
     }
   }
 }
+
+// Graphics buffer for neutron history visualization.
+class HistoryLayer {
+  constructor(width, height) {
+    // Create graphics buffer.
+    this.width = width;
+    this.height = height;
+    this.graphics = createGraphics(width, height);
+
+    // Initialize history entries.
+    this.clear();
+
+    // Misc. draw settings.
+    this.graphics.noFill();
+    this.graphics.strokeWeight(2);
+  }
+
+  // Add new neutron population entry.
+  add(population) {
+    // Cap number of history entries.
+    if (this.total.length === this.width) {
+      this.total.shift();
+      this.average.shift();
+    }
+
+    // Add new data and recalculate average.
+    this.total.push(population);
+    this.average.push(this.total.reduce((a, b) => a + b) / this.total.length);
+
+    // Update maximum value if the new value is greater.
+    this.maximum = max(population, this.maximum);
+  }
+
+  // Clear all history entries.
+  clear() {
+    this.total = [];
+    this.average = [];
+    this.maximum = this.height / 5;
+  }
+
+  // Draw the graphics buffer.
+  image(offsetX, offsetY) {
+    image(this.graphics, offsetX, offsetY);
+  }
+
+  // Plot an array of history entries as a line graph.
+  plot(entries) {
+    this.graphics.beginShape();
+    for (let i = 0; i < entries.length; i++) {
+      const y = map(entries[i], 0, this.maximum, this.height, 0);
+      this.graphics.vertex(this.width - entries.length + i, y);
+    }
+    this.graphics.endShape();
+  }
+
+  // Render neutrons to the graphics buffer.
+  redraw(neutrons, updateCallback) {
+    // Clear graphics buffer.
+    this.graphics.clear();
+    this.graphics.background(51, 127);
+
+    // Plot the average and total neutron populations as a line graph.
+    this.graphics.stroke(0, 213, 255);
+    this.plot(this.average);
+    this.graphics.stroke(255, 170, 0);
+    this.plot(this.total);
+
+    // Draw lines at borders.
+    this.graphics.stroke(85);
+    this.graphics.line(0, this.height, this.width, this.height);
+    this.graphics.line(this.width, 0, this.width, this.height);
+  }
+}

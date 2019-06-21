@@ -8,17 +8,21 @@ const TILE_SIZE = 20;
 // Heat-related constants.
 const MAX_HEAT = 1000;
 
+// History graph.
+const MAX_HISTORY_ENTRIES = 320;
+
 // Dimensions.
 let gridWidth, gridHeight;
 let offsetX, offsetY;
 
 // Simulation state.
 let tiles, heat, neutrons;
+let history = true;
 let paused = false;
 let thermal = false;
 
 // Graphics buffers.
-let tileLayer, thermalLayer, neutronLayer;
+let tileLayer, thermalLayer, neutronLayer, historyLayer;
 
 function setup() {
   // Position canvas.
@@ -45,6 +49,7 @@ function setup() {
   tileLayer.redraw(tiles);
   thermalLayer = new ThermalLayer(gridWidth, gridHeight);
   neutronLayer = new NeutronLayer(gridWidth, gridHeight);
+  historyLayer = new HistoryLayer(MAX_HISTORY_ENTRIES, 180);
 }
 
 function draw() {
@@ -57,6 +62,10 @@ function draw() {
     }
   });
 
+  if (!paused) {
+    historyLayer.add(neutrons.length);
+  }
+
   // Draw graphics buffers.
   if (thermal) {
     thermalLayer.redraw(heat);
@@ -64,6 +73,10 @@ function draw() {
   } else {
     tileLayer.image(offsetX, offsetY);
     neutronLayer.image(offsetX, offsetY);
+  }
+  if (history) {
+    historyLayer.redraw();
+    historyLayer.image(0, 0);
   }
 
   // Draw when mouse is pressed.
@@ -77,6 +90,10 @@ function keyPressed() {
     case ' ':
       // Toggle pause state.
       paused = !paused;
+      break;
+    case 'h':
+      // Toggle neutron history visualization.
+      history = !history;
       break;
     case 't':
       // Toggle thermal view.
