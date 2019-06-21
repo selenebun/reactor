@@ -131,9 +131,17 @@ function keyPressed() {
         controlRods = !controlRods;
         tileLayer.redraw(tiles);
         break;
+      case 'r':
+        // Completely reset the simulation.
+        reset();
+        break;
       case 't':
         // Toggle thermal view.
         thermal = !thermal;
+        break;
+      case 'z':
+        // Reset neutrons and heat and clear history.
+        resetHeat();
         break;
     }
   }
@@ -160,6 +168,22 @@ function mouseDraw() {
     tiles.set(col, row, selected);
     tileLayer.redraw(tiles);
   }
+}
+
+// Completely reset the simulation.
+function reset() {
+  tiles.clear();
+  tileLayer.redraw(tiles);
+  resetHeat();
+  paused = false;
+  thermal = false;
+}
+
+// Reset heat, kill all neutrons, and clear neutron history.
+function resetHeat() {
+  heat.clear();
+  neutrons = [];
+  historyLayer.clear();
 }
 
 // Randomly generate neutrons from fuel cells.

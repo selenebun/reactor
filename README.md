@@ -14,6 +14,8 @@ You can run the simulation [here](https://rsaihe.github.io/reactor).
 | H           | Toggle neutron history visualization.                                          |
 | Q           | Toggle control rods.                                                           |
 | T           | Toggle thermal view.                                                           |
+| R           | Completely reset the simulation.                                               |
+| Z           | Clear all neutrons and heat.                                                   |
 
 ### Item Types
 
