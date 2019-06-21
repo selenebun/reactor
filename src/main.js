@@ -7,6 +7,7 @@ const TILE_SIZE = 20;
 
 // Heat-related constants.
 const MAX_HEAT = 1000;
+const TRANSFER_RATE = 0.16;
 
 // History graph.
 const MAX_HISTORY_ENTRIES = 320;
@@ -86,6 +87,9 @@ function draw() {
   if (!paused) {
     // Spontaneously generate neutrons.
     spontaneousNeutrons();
+
+    // Apply cooling and transfer heat.
+    transferHeat();
 
     // Update history.
     historyLayer.add(neutrons.length);
@@ -198,6 +202,29 @@ function spontaneousNeutrons() {
 
         // Increase heat at tile.
         heat.increase(col, row, SPONT_HEAT);
+      }
+    }
+  }
+}
+
+// Apply cooling and transfer heat.
+function transferHeat() {
+  for (let row = 0; row < tiles.rows; row++) {
+    for (let col = 0; col < tiles.cols; col++) {
+      // Apply cooling to tile.
+      const value = tiles.get(col, row);
+      const tileType = TILES[value];
+      let tileHeat = Math.min(heat.get(col, row), MAX_HEAT);
+      tileHeat *= 1 - tileType.coolingRate;
+      tileHeat = Math.max(0, tileHeat);
+
+      // Spread heat to adjacent tiles.
+      const adjacent = heat.adjacent(col, row);
+      const transfer = tileHeat * TRANSFER_RATE;
+      heat.increase(col, row, -transfer);
+      for (let tile of adjacent) {
+        const { col, row } = tile;
+        heat.increase(col, row, transfer / adjacent.length);
       }
     }
   }
