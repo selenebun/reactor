@@ -14,6 +14,7 @@ let offsetX, offsetY;
 
 // Simulation state.
 let tiles, heat, neutrons;
+let paused = false;
 let thermal = false;
 
 // Graphics buffers.
@@ -49,19 +50,21 @@ function setup() {
 function draw() {
   background(34);
 
+  // Update neutrons.
+  neutronLayer.redraw(neutrons, n => {
+    if (!paused) {
+      n.update();
+    }
+  });
+
   // Draw graphics buffers.
   if (thermal) {
     thermalLayer.redraw(heat);
     thermalLayer.image(offsetX, offsetY);
   } else {
     tileLayer.image(offsetX, offsetY);
+    neutronLayer.image(offsetX, offsetY);
   }
-
-  // Update and draw neutrons.
-  neutronLayer.redraw(neutrons, n => {
-    n.update();
-  });
-  neutronLayer.image(offsetX, offsetY);
 
   // Draw when mouse is pressed.
   if (mouseIsPressed) {
@@ -71,6 +74,10 @@ function draw() {
 
 function keyPressed() {
   switch (key) {
+    case ' ':
+      // Toggle pause state.
+      paused = !paused;
+      break;
     case 't':
       // Toggle thermal view.
       thermal = !thermal;
