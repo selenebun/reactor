@@ -10,6 +10,7 @@
   --fg: #aaa;
   --heading: #83cc14;
   --subheading: #527a0c;
+  --controls: #e5a016;
 }
 
 body {
@@ -31,12 +32,17 @@ aside {
   display: flex;
   flex-direction: column;
   max-height: 100vh;
-  min-width: 200px;
+  min-width: 218px;
   overflow-y: scroll;
 }
 
 header {
   padding: 18px 32px;
+}
+
+h1,
+h2 {
+  text-align: center;
 }
 
 h1 {
@@ -49,16 +55,24 @@ h1 {
   flex: 1;
 }
 
-#item-info {
+.panel {
   background-color: #333;
   border-radius: 18px;
-  padding: 8px;
+  margin-bottom: 20px;
+  padding: 12px;
+}
+
+.center {
   text-align: center;
 }
 
 h2 {
   color: var(--subheading);
   font-size: 20px;
+}
+
+.control {
+  color: var(--controls);
 }
 
 footer {
