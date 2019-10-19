@@ -4,12 +4,12 @@
     url('fonts/Montserrat-Regular.woff2') format('woff2');
 }
 
-/* Page colors */
+/* Color palette. */
 :root {
   --bg: #222;
   --fg: #aaa;
-  --heading: #83cc14;
-  --subheading: #527a0c;
+  --primary: #83cc14;
+  --secondary: #527a0c;
   --controls: #e5a016;
 }
 
@@ -19,9 +19,12 @@ body {
   display: flex;
   flex-direction: row;
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
   margin: 0;
   min-height: 100vh;
+}
+
+.flex {
+  flex: 1;
 }
 
 canvas {
@@ -40,15 +43,14 @@ header {
   padding: 18px 32px;
 }
 
-h1,
-h2 {
-  text-align: center;
-}
-
 h1 {
-  color: var(--heading);
+  color: var(--primary);
   font-size: 32px;
   margin: 0;
+}
+
+.center {
+  text-align: center;
 }
 
 .flex {
@@ -62,12 +64,8 @@ h1 {
   padding: 12px;
 }
 
-.center {
-  text-align: center;
-}
-
 h2 {
-  color: var(--subheading);
+  color: var(--secondary);
   font-size: 20px;
 }
 
@@ -76,11 +74,10 @@ h2 {
 }
 
 footer {
-  color: var(--subheading);
   padding: 12px;
-  text-align: center;
 }
 
-footer small {
-  font-size: 16px;
+#copywrite {
+  color: var(--secondary);
+  margin: 0;
 }
