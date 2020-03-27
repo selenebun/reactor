@@ -53,10 +53,6 @@ h1 {
   text-align: center;
 }
 
-.flex {
-  flex: 1;
-}
-
 .panel {
   background-color: #333;
   border-radius: 18px;
@@ -71,13 +67,4 @@ h2 {
 
 .control {
   color: var(--controls);
-}
-
-footer {
-  padding: 12px;
-}
-
-#copywrite {
-  color: var(--secondary);
-  margin: 0;
 }
