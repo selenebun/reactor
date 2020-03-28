@@ -10,6 +10,7 @@
   --fg: #aaa;
   --primary: #83cc14;
   --secondary: #527a0c;
+  --panel: #333;
   --controls: #e5a016;
 }
 
@@ -54,7 +55,7 @@ h1 {
 }
 
 .panel {
-  background-color: #333;
+  background-color: var(--panel);
   border-radius: 18px;
   margin-bottom: 20px;
   padding: 12px;
