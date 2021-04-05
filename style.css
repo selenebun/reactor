@@ -1,0 +1,82 @@
+@font-face {
+    font-family: "Montserrat";
+    src: local("Montserrat"),
+        url("/fonts/Montserrat-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Roboto Slab";
+    src: local("Roboto Slab"),
+        url("/fonts/RobotoSlab-Regular.woff2") format("woff2");
+}
+
+:root {
+    --bg: #111;
+    --fg: #ccc;
+    --primary: #83cc14;
+    --secondary: #527a0c;
+    --panel: #222;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    display: grid;
+    font-family: "Montserrat", sans-serif;
+    grid-template:
+        "main hd" auto
+        "main item" auto
+        "main ctrl" auto
+        "main ." 1fr
+        "main ft" auto / 1fr minmax(240px, auto);
+    margin: 0;
+    min-height: 100vh;
+}
+
+main {
+    grid-area: main;
+}
+
+header {
+    grid-area: hd;
+    padding: 16px 32px;
+}
+
+#item, #controls {
+    background: var(--panel);
+    border-radius: 18px;
+    padding: 12px;
+}
+
+#item {
+    grid-area: item;
+    margin-bottom: 20px;
+}
+
+#controls {
+    grid-area: ctrl;
+}
+
+footer {
+    grid-area: ft;
+}
+
+.center, h1, h2 {
+    text-align: center;
+}
+
+h1, h2 {
+    font-family: "Roboto Slab", serif;
+}
+
+h1 {
+    color: var(--primary);
+}
+
+h2 {
+    color: var(--secondary);
+}
+
+a:link, a:visited {
+    color: var(--fg);
+}
