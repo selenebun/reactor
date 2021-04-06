@@ -61,6 +61,10 @@ footer {
     grid-area: ft;
 }
 
+canvas {
+    display: block;
+}
+
 .center, h1, h2 {
     text-align: center;
 }
