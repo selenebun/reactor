@@ -114,6 +114,11 @@ class Grid {
         this.redraw();
     }
 
+    clear() {
+        this.grid.fill(Tile.EMPTY);
+        this.redraw();
+    }
+
     display() {
         image(this.ctx, this.offsetX, this.offsetY);
     }

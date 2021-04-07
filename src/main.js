@@ -35,7 +35,7 @@ let selectedTile;
 
 // Simulation state.
 let controlRods = false;
-const neutrons = [];
+let neutrons = [];
 let tiles;
 
 function setup() {
@@ -115,10 +115,19 @@ function keyPressed() {
         case "7":
             updateTile(Tile.CONTROL_ROD);
             break;
+        case " ":
+            // Clear neutrons and grid.
+            neutrons = [];
+            tiles.clear();
+            break;
         case "q":
             // Toggle control rods.
             controlRods = !controlRods;
             tiles.redraw();
+            break;
+        case "z":
+            // Clear neutrons.
+            neutrons = [];
             break;
     }
 }
