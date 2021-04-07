@@ -49,7 +49,7 @@ const Tile = {
     },
     HORIZONTAL_REFLECTOR: {
         name: "Reflector",
-        description: "Reflects neutrons horizontally.",
+        description: "Reflects neutrons in the horizontal direction.",
         color: "#ffbf3f",
         interact(n) {
             // Randomly reflect neutrons.
@@ -63,7 +63,7 @@ const Tile = {
     },
     VERTICAL_REFLECTOR: {
         name: "Reflector",
-        description: "Reflects neutrons vertically.",
+        description: "Reflects neutrons in the vertical direction.",
         color: "#f48e3f",
         interact(n) {
             // Randomly reflect neutrons.
