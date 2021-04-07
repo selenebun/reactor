@@ -26,26 +26,34 @@ class Grid {
         this.height = rows * TILE_SIZE;
         this.offsetX = (width - this.width) / 2;
         this.offsetY = (height - this.height) / 2;
+
+        // Graphics context.
+        this.ctx = createGraphics(this.width, this.height);
+        this.ctx.stroke('#111');
+        this.redraw();
     }
 
     display() {
-        for (let row = 0; row < this.rows; ++row) {
-            for (let col = 0; col < this.cols; ++col) {
-                // Fill color based on tile type.
-                const tile = this.get(col, row);
-                fill(tile.color);
-                stroke(0);
-
-                // Draw the tile at the correct position.
-                const x = col * TILE_SIZE;
-                const y = row * TILE_SIZE;
-                square(this.offsetX + x, this.offsetY + y, TILE_SIZE);
-            }
-        }
+        image(this.ctx, this.offsetX, this.offsetY);
     }
 
     get(col, row) {
         return this.grid[row * this.cols + col];
+    }
+
+    redraw() {
+        for (let row = 0; row < this.rows; ++row) {
+            for (let col = 0; col < this.cols; ++col) {
+                // Fill color based on tile type.
+                const tile = this.get(col, row);
+                this.ctx.fill(tile.color);
+
+                // Draw the tile at the correct position.
+                const x = col * TILE_SIZE;
+                const y = row * TILE_SIZE;
+                this.ctx.square(x, y, TILE_SIZE);
+            }
+        }
     }
 
     set(col, row, tile) {

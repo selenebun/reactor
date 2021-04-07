@@ -88,6 +88,7 @@ function mouseDraw() {
     // Update the tile grid.
     const { col, row } = nearestTile(x, y);
     tiles.set(col, row, selectedTile);
+    tiles.redraw();
 }
 
 // Find the nearest tile to a particular coordinate relative to the tile grid.
