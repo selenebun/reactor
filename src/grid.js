@@ -34,6 +34,7 @@ class Grid {
                 // Fill color based on tile type.
                 const tile = this.get(col, row);
                 fill(tile.color);
+                stroke(0);
 
                 // Draw the tile at the correct position.
                 const x = col * TILE_SIZE;

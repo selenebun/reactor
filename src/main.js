@@ -5,6 +5,10 @@ const HORIZONTAL_MARGIN = 6;
 const VERTICAL_MARGIN = 5;
 const TILE_SIZE = 30;
 
+// Neutron parameters.
+const NEUTRON_SIZE = 5;
+const NEUTRON_SPEED = 3;
+
 // DOM elements.
 const tileName = document.getElementById("name");
 const tileDescription = document.getElementById("description");
@@ -13,6 +17,7 @@ const tileDescription = document.getElementById("description");
 let selectedTile;
 
 // Simulation state.
+const neutrons = [];
 let tiles;
 
 function setup() {
@@ -23,6 +28,9 @@ function setup() {
 
     // Update DOM elements.
     updateTile(Tile.FUEL);
+
+    // Set drawing mode.
+    ellipseMode(RADIUS);
 
     // Initialize tile grid.
     const cols = Math.floor(width / TILE_SIZE) - HORIZONTAL_MARGIN * 2;
@@ -35,6 +43,19 @@ function draw() {
 
     // Display tile grid.
     tiles.display();
+
+    // Update neutrons.
+    for (const n of neutrons) {
+        n.update(tiles.width, tiles.height);
+        n.display(tiles.offsetX, tiles.offsetY);
+    }
+
+    // Remove dead neutrons.
+    for (let i = neutrons.length - 1; i >= 0; --i) {
+        if (neutrons[i].dead) {
+            neutrons.splice(i, 1);
+        }
+    }
 
     // Draw when mouse is pressed.
     if (mouseIsPressed) {
