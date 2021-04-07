@@ -77,7 +77,7 @@ const Tile = {
     },
     CONTROL_ROD: {
         name: "Control Rod",
-        description: "Absorbs neutrons when toggled.",
+        description: "Absorbs neutrons only when toggled.",
         color() {
             // Change color based on control rod state.
             if (controlRods) {

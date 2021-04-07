@@ -21,4 +21,4 @@ A simple, unscientific nuclear reactor simulation.
 | 3       | **Moderator** tiles slow down neutrons.                    |
 | 4       | **Shielding** absorbs neutrons.                            |
 | 5 and 6 | **Reflectors** reflect neutrons in a particular direction. |
-| 7       | **Control rods** only absorb neutrons when toggled.        |
+| 7       | **Control rods** absorb neutrons only when toggled.        |
