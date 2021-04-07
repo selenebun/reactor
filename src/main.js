@@ -14,6 +14,7 @@ const SPONTANEOUS_CHANCE = 0.002;
 // Neutron parameters.
 const NEUTRON_SIZE = 5;
 const NEUTRON_SPEED = 5;
+const NEUTRON_THERMAL_SPEED = 4;
 
 // DOM elements.
 const tileName = document.getElementById("name");
@@ -87,6 +88,9 @@ function keyPressed() {
             break;
         case "2":
             updateTile(Tile.FUEL);
+            break;
+        case "3":
+            updateTile(Tile.MODERATOR);
             break;
     }
 }

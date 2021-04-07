@@ -26,7 +26,16 @@ const Tile = {
                     neutrons.push(new Neutron(x, y));
                 }
             }
-        }
+        },
+    },
+    MODERATOR: {
+        name: "Moderator",
+        description: "Slows down neutrons.",
+        color: "#eee",
+        interact(n) {
+            // Slow down neutrons.
+            n.vel.limit(NEUTRON_THERMAL_SPEED);
+        },
     },
 };
 
