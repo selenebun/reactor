@@ -16,6 +16,7 @@
     --primary: #83cc14;
     --secondary: #527a0c;
     --panel: #222;
+    --controls: #e5a016;
 }
 
 body {
@@ -79,6 +80,16 @@ h1 {
 
 h2 {
     color: var(--secondary);
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.control {
+    color: var(--controls);
 }
 
 a:link, a:visited {
