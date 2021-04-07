@@ -11,6 +11,22 @@ const Tile = {
         name: "Fuel Cell",
         description: "Reacts with neutrons.",
         color: "#83cc14",
+        interact(n, col, row) {
+            // Randomly absorb neutrons.
+            if (Math.random() < FUEL_ABSORB_CHANCE) {
+                n.dead = true;
+
+                // Spawn more neutrons.
+                const count = Math.floor(random(
+                    FUEL_MIN_NEUTRONS,
+                    FUEL_MAX_NEUTRONS + 1
+                ));
+                for (let i = 0; i < count; ++i) {
+                    const { x, y } = randomInsideTile(col, row);
+                    neutrons.push(new Neutron(x, y));
+                }
+            }
+        }
     },
 };
 

@@ -6,11 +6,14 @@ const VERTICAL_MARGIN = 5;
 const TILE_SIZE = 30;
 
 // Fuel parameters.
+const FUEL_ABSORB_CHANCE = 0.05;
+const FUEL_MAX_NEUTRONS = 3;
+const FUEL_MIN_NEUTRONS = 1;
 const SPONTANEOUS_CHANCE = 0.002;
 
 // Neutron parameters.
 const NEUTRON_SIZE = 5;
-const NEUTRON_SPEED = 3;
+const NEUTRON_SPEED = 5;
 
 // DOM elements.
 const tileName = document.getElementById("name");
@@ -51,6 +54,13 @@ function draw() {
     for (const n of neutrons) {
         n.update(tiles.width, tiles.height);
         n.display(tiles.offsetX, tiles.offsetY);
+
+        // Interact with tiles.
+        const { col, row } = nearestTile(n.pos.x, n.pos.y);
+        const tile = tiles.get(col, row);
+        if (tile && typeof tile.interact === 'function') {
+            tile.interact(n, col, row, neutrons);
+        }
     }
 
     // Generate spontaneous neutrons.
