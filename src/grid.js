@@ -1,3 +1,5 @@
+"use strict";
+
 // Types of tiles within the reactor grid.
 const Tile = {
     EMPTY: {

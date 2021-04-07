@@ -1,3 +1,5 @@
+"use strict";
+
 // Grid dimensions.
 const HORIZONTAL_MARGIN = 6;
 const VERTICAL_MARGIN = 5;
