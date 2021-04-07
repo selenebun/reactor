@@ -37,6 +37,16 @@ const Tile = {
             n.vel.limit(NEUTRON_THERMAL_SPEED);
         },
     },
+    SHIELDING: {
+        name: "Shielding",
+        description: "Absorbs neutrons.",
+        color: "#888",
+        interact(n) {
+            if (Math.random() < SHIELDING_ABSORB_CHANCE) {
+                n.dead = true;
+            }
+        },
+    },
 };
 
 // A 2D grid of tiles.

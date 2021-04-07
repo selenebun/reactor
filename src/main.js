@@ -6,10 +6,13 @@ const VERTICAL_MARGIN = 5;
 const TILE_SIZE = 30;
 
 // Fuel parameters.
-const FUEL_ABSORB_CHANCE = 0.05;
+const FUEL_ABSORB_CHANCE = 0.04;
 const FUEL_MAX_NEUTRONS = 3;
 const FUEL_MIN_NEUTRONS = 1;
 const SPONTANEOUS_CHANCE = 0.002;
+
+// Shielding parameters.
+const SHIELDING_ABSORB_CHANCE = 0.12;
 
 // Neutron parameters.
 const NEUTRON_SIZE = 5;
@@ -91,6 +94,9 @@ function keyPressed() {
             break;
         case "3":
             updateTile(Tile.MODERATOR);
+            break;
+        case "4":
+            updateTile(Tile.SHIELDING);
             break;
     }
 }
