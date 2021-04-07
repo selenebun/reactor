@@ -1,7 +1,14 @@
 // Types of tiles within the reactor grid.
 const Tile = {
     EMPTY: {
+        name: "Empty Tile",
+        description: "Does nothing.",
         color: "#bbb"
+    },
+    FUEL: {
+        name: "Fuel Cell",
+        description: "Reacts with neutrons.",
+        color: "#83cc14"
     }
 };
 
