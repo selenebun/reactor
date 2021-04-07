@@ -47,6 +47,34 @@ const Tile = {
             }
         },
     },
+    HORIZONTAL_REFLECTOR: {
+        name: "Reflector",
+        description: "Reflects neutrons horizontally.",
+        color: "#ffbf3f",
+        interact(n) {
+            // Randomly reflect neutrons.
+            const r = Math.random();
+            if (r < REFLECTION_CHANCE) {
+                n.vel.x *= -1;
+            } else if (r < REFLECTION_CHANCE + REFLECTOR_ABSORB_CHANCE) {
+                n.dead = true;
+            }
+        },
+    },
+    VERTICAL_REFLECTOR: {
+        name: "Reflector",
+        description: "Reflects neutrons vertically.",
+        color: "#ff7f1f",
+        interact(n) {
+            // Randomly reflect neutrons.
+            const r = Math.random();
+            if (r < REFLECTION_CHANCE) {
+                n.vel.y *= -1;
+            } else if (r < REFLECTION_CHANCE + REFLECTOR_ABSORB_CHANCE) {
+                n.dead = true;
+            }
+        },
+    },
 };
 
 // A 2D grid of tiles.

@@ -14,6 +14,10 @@ const SPONTANEOUS_CHANCE = 0.002;
 // Shielding parameters.
 const SHIELDING_ABSORB_CHANCE = 0.12;
 
+// Reflector parameters.
+const REFLECTOR_ABSORB_CHANCE = 0.1;
+const REFLECTION_CHANCE = 0.65;
+
 // Neutron parameters.
 const NEUTRON_SIZE = 5;
 const NEUTRON_SPEED = 5;
@@ -97,6 +101,12 @@ function keyPressed() {
             break;
         case "4":
             updateTile(Tile.SHIELDING);
+            break;
+        case "5":
+            updateTile(Tile.HORIZONTAL_REFLECTOR);
+            break;
+        case "6":
+            updateTile(Tile.VERTICAL_REFLECTOR);
             break;
     }
 }
