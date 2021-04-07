@@ -64,7 +64,7 @@ const Tile = {
     VERTICAL_REFLECTOR: {
         name: "Reflector",
         description: "Reflects neutrons in the vertical direction.",
-        color: "#f48e3f",
+        color: "#77cfd6",
         interact(n) {
             // Randomly reflect neutrons.
             const r = Math.random();
@@ -81,9 +81,9 @@ const Tile = {
         color() {
             // Change color based on control rod state.
             if (controlRods) {
-                return "#bf7fbf";
+                return "#aa61aa";
             } else {
-                return "#ff7fbf";
+                return "#3f97f4";
             }
         },
         interact(n) {
