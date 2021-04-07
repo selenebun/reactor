@@ -101,7 +101,7 @@ function mouseDraw() {
 function nearestTile(x, y) {
     return {
         col: Math.floor(x / TILE_SIZE),
-        row: Math.floor(y / TILE_SIZE)
+        row: Math.floor(y / TILE_SIZE),
     };
 }
 
@@ -109,7 +109,7 @@ function nearestTile(x, y) {
 function randomInsideTile(col, row) {
     return {
         x: (col + Math.random()) * TILE_SIZE,
-        y: (row + Math.random()) * TILE_SIZE
+        y: (row + Math.random()) * TILE_SIZE,
     };
 }
 

@@ -5,13 +5,13 @@ const Tile = {
     EMPTY: {
         name: "Empty Tile",
         description: "Does nothing.",
-        color: "#bbb"
+        color: "#bbb",
     },
     FUEL: {
         name: "Fuel Cell",
         description: "Reacts with neutrons.",
-        color: "#83cc14"
-    }
+        color: "#83cc14",
+    },
 };
 
 // A 2D grid of tiles.
