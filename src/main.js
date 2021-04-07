@@ -5,6 +5,9 @@ const HORIZONTAL_MARGIN = 6;
 const VERTICAL_MARGIN = 5;
 const TILE_SIZE = 30;
 
+// Fuel parameters.
+const SPONTANEOUS_CHANCE = 0.002;
+
 // Neutron parameters.
 const NEUTRON_SIZE = 5;
 const NEUTRON_SPEED = 3;
@@ -49,6 +52,9 @@ function draw() {
         n.update(tiles.width, tiles.height);
         n.display(tiles.offsetX, tiles.offsetY);
     }
+
+    // Generate spontaneous neutrons.
+    spontaneousNeutrons();
 
     // Remove dead neutrons.
     for (let i = neutrons.length - 1; i >= 0; --i) {
@@ -97,6 +103,28 @@ function nearestTile(x, y) {
         col: Math.floor(x / TILE_SIZE),
         row: Math.floor(y / TILE_SIZE)
     };
+}
+
+// Get random coordinates within a given tile.
+function randomInsideTile(col, row) {
+    return {
+        x: (col + Math.random()) * TILE_SIZE,
+        y: (row + Math.random()) * TILE_SIZE
+    };
+}
+
+// Randomly generate spontaneous neutrons from fuel cells.
+function spontaneousNeutrons() {
+    for (let row = 0; row < tiles.rows; ++row) {
+        for (let col = 0; col < tiles.cols; ++col) {
+            const tile = tiles.get(col, row);
+            if (tile === Tile.FUEL && Math.random() < SPONTANEOUS_CHANCE) {
+                // Generate neutrons at random coordinates inside the tile.
+                const { x, y } = randomInsideTile(col, row);
+                neutrons.push(new Neutron(x, y));
+            }
+        }
+    }
 }
 
 // Update the currently selected tile.
