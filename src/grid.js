@@ -64,7 +64,7 @@ const Tile = {
     VERTICAL_REFLECTOR: {
         name: "Reflector",
         description: "Reflects neutrons vertically.",
-        color: "#ff7f1f",
+        color: "#f48e3f",
         interact(n) {
             // Randomly reflect neutrons.
             const r = Math.random();
