@@ -18,6 +18,9 @@ const SHIELDING_ABSORB_CHANCE = 0.12;
 const REFLECTOR_ABSORB_CHANCE = 0.1;
 const REFLECTION_CHANCE = 0.65;
 
+// Control rod parameters.
+const CONTROL_ROD_ABSORB_CHANCE = 0.3;
+
 // Neutron parameters.
 const NEUTRON_SIZE = 5;
 const NEUTRON_SPEED = 5;
@@ -31,6 +34,7 @@ const tileDescription = document.getElementById("description");
 let selectedTile;
 
 // Simulation state.
+let controlRods = false;
 const neutrons = [];
 let tiles;
 
@@ -107,6 +111,14 @@ function keyPressed() {
             break;
         case "6":
             updateTile(Tile.VERTICAL_REFLECTOR);
+            break;
+        case "7":
+            updateTile(Tile.CONTROL_ROD);
+            break;
+        case "q":
+            // Toggle control rods.
+            controlRods = !controlRods;
+            tiles.redraw();
             break;
     }
 }

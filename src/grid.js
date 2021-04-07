@@ -75,6 +75,24 @@ const Tile = {
             }
         },
     },
+    CONTROL_ROD: {
+        name: "Control Rod",
+        description: "Absorbs neutrons when toggled.",
+        color() {
+            // Change color based on control rod state.
+            if (controlRods) {
+                return "#bf7fbf";
+            } else {
+                return "#ff7fbf";
+            }
+        },
+        interact(n) {
+            // Absorb neutrons when toggled.
+            if (controlRods && Math.random() < CONTROL_ROD_ABSORB_CHANCE) {
+                n.dead = true;
+            }
+        },
+    },
 };
 
 // A 2D grid of tiles.
@@ -109,7 +127,11 @@ class Grid {
             for (let col = 0; col < this.cols; ++col) {
                 // Fill color based on tile type.
                 const tile = this.get(col, row);
-                this.ctx.fill(tile.color);
+                if (typeof tile.color === 'function') {
+                    this.ctx.fill(tile.color());
+                } else {
+                    this.ctx.fill(tile.color);
+                }
 
                 // Draw the tile at the correct position.
                 const x = col * TILE_SIZE;
